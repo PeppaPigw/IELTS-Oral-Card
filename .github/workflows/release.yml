@@ -64,12 +64,12 @@ jobs:
         run: |
           if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
             echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
-            cat > android/key.properties <<EOF
-            storePassword=$ANDROID_STORE_PASSWORD
-            keyPassword=$ANDROID_KEY_PASSWORD
-            keyAlias=$ANDROID_KEY_ALIAS
-            storeFile=upload-keystore.jks
-            EOF
+            {
+              echo "storePassword=$ANDROID_STORE_PASSWORD"
+              echo "keyPassword=$ANDROID_KEY_PASSWORD"
+              echo "keyAlias=$ANDROID_KEY_ALIAS"
+              echo "storeFile=upload-keystore.jks"
+            } > android/key.properties
             echo "Release keystore configured."
           else
             echo "No ANDROID_KEYSTORE_BASE64 found. Using debug signing fallback."
