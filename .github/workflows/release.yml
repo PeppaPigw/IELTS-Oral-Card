@@ -98,7 +98,7 @@ jobs:
           generate_release_notes: true
 
       - name: Upload AAB to Google Play (optional)
-        if: ${{ vars.ENABLE_PLAY_UPLOAD == 'true' && secrets.PLAY_SERVICE_ACCOUNT_JSON != '' }}
+        if: ${{ vars.ENABLE_PLAY_UPLOAD == 'true' }}
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
@@ -162,7 +162,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload to TestFlight (optional)
-        if: ${{ vars.ENABLE_TESTFLIGHT_UPLOAD == 'true' && secrets.APP_STORE_CONNECT_API_PRIVATE_KEY != '' }}
+        if: ${{ vars.ENABLE_TESTFLIGHT_UPLOAD == 'true' }}
         uses: apple-actions/upload-testflight-build@v4
         with:
           app-path: build/ios/ipa/*.ipa
